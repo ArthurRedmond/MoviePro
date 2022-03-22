@@ -42,6 +42,11 @@ namespace MoviePro.Models.Database
         [NotMapped]
         [Display(Name = "Backdrop Image")]
         public IFormFile BackdropFile { get; set; }
+
+        //Navigation
+        public ICollection<MovieCollection> Collections { get; set; } = new HashSet<MovieCollection>();
+        public ICollection<MovieCast> Cast { get; set; } = new HashSet<MovieCast>();
+        public ICollection<MovieCrew> Crew { get; set; } = new HashSet<MovieCrew>();
     }
 
 }
