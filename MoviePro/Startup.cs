@@ -30,16 +30,25 @@ namespace MoviePro
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                    ConnectionService.GetConnectionString(Configuration)));
+                options.UseNpgsql(ConnectionService.GetConnectionString(Configuration)));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddDefaultUI()
+            //    .AddDefaultTokenProviders()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddDefaultUI()
+                .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.AddScoped<SeedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
