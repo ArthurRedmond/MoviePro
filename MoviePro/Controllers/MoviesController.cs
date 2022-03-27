@@ -202,6 +202,37 @@ namespace MoviePro.Controllers
             return _context.Movie.Any(e => e.Id == id);
         }
 
+        public async Task<IActionResult> Details(int? id, bool local = false)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Movie movie = new();
+            if (local)
+            {
+                // Get the Movie data from the local database
+                movie = await _context.Movie.Include(m => m.Cast)
+                                            .Include(m => m.Crew)
+                                            .FirstOrDefaultAsync(m => m.Id == id);
+            }
+            else
+            {
+                // Get the Movie data from the API
+                var movieDetail = await _tmdbMoiveService.MovieDetailAsync((int)id);
+                movie = await _tmdbMappingService.MapMovieDetailAsync(movieDetail);
+            }
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["Local"] = local;
+            return View(movie);
+        }
+
         private async Task AddToMovieCollection(int movieId, string collectionName)
         {
             var collection = await _context.Collection.FirstOrDefaultAsync(c => c.Name == collectionName);
