@@ -96,7 +96,13 @@ button.btn-sm, a.btn-sm {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
 /*CARD STYLES*/
+.card {
+    background-color: #343a40;
+    color: #f8f9fa;
+}
+
 .card-hr {
     color: #212121;
     background-color: #212121;
@@ -115,11 +121,30 @@ button.btn-sm, a.btn-sm {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    color: #eef4ed;
+    /*color: #eef4ed;*/
 }
 
 .card-img, .card-img-top, .card-img-bottom {
-    height: 150px;
+    /*height: 150px;*/
+    height: 100%;
+}
+
+.clampOverview {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.clampTitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+h5.card-title {
+    height: 2.5em;
 }
 
 /*PAGE STYLES*/
@@ -182,4 +207,16 @@ button.btn-sm, a.btn-sm {
 ::-webkit-scrollbar-thumb {
     background: #134074;
     border-radius: 10px;
+}
+
+.fa-cog {
+    color: dimgray;
+}
+
+.names {
+    color: #f8f9fa; 
+}
+
+hr {
+    color="#f8f9fa";
 }
